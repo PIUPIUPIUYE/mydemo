@@ -15,8 +15,8 @@ Example.fallingBox = function() {
                  engine:engine,
                  element:document.body,
                  options:{
-                 	width:$(window).width(),
-                 	height:$(window).height(),
+                 	width:800,
+                 	height:600,
                  	wireframes:false
                  }
            });
