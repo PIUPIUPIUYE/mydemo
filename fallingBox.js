@@ -21,7 +21,7 @@ Example.fallingBox = function() {
                  }
            });
             Render.run(render);
-           Engine.run(engine);
+          
            
            var runner = Runner.create();
     Runner.run(runner, engine);
