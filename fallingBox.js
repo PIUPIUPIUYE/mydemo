@@ -1,4 +1,5 @@
-var Example = Example || {};
+
+  var Example = Example || {};
 
 Example.fallingBox = function() {
     var Engine=Matter.Engine,
@@ -21,7 +22,7 @@ Example.fallingBox = function() {
                  }
            });
             Render.run(render);
-          
+         
            
            var runner = Runner.create();
     Runner.run(runner, engine);
@@ -43,9 +44,22 @@ Example.fallingBox = function() {
            var stack_circle=Composites.stack(1200,100,5,5,2,3,function(x,y){
            	   return Bodies.circle(x,y,30);
            })
-           var mouseConstraint=MouseConstraint.create(engine,{});
            
-           World.add(world,[recA,ground,stack_rect,stack_circle,mouseConstraint]);
+           
+           World.add(world,[recA,ground,stack_rect,stack_circle]);
+           
+           var mouse = Mouse.create(render.canvas),
+        mouseConstraint = MouseConstraint.create(engine, {
+            mouse: mouse,
+            constraint: {
+                stiffness: 0.2,
+                render: {
+                    visible: false
+                }
+            }
+        });
+
+    World.add(world, mouseConstraint);
     
 
     // keep the mouse in sync with rendering
