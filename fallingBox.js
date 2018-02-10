@@ -4,21 +4,44 @@ Example.fallingBox = function() {
     var Engine=Matter.Engine,
                 Render=Matter.Render,
                 World=Matter.World,
+                Mouse=Matter.Mouse,
+                MouseConstraint=Matter.MouseConstraint,
+                Composites=Matter.Composites,
                 Bodies=Matter.Bodies;
             var engine=Engine.create(),
                 world=engine.world;
             var render=Render.create({
                  engine:engine,
-                 element:document.body
+                 element:document.body,
+                 options:{
+                 	width:$(window).width(),
+                 	height:$(window).height(),
+                 	wireframes:false
+                 }
            });
             Render.run(render);
            Engine.run(engine);
-           var boxA=Bodies.rectangle(500,170,60,260);
-               
-           var ground=Bodies.rectangle(400,600,600,100,{isStatic:true});
-          World.add(world,[boxA,ground]);
-    
-    
+           
+           var recA=Bodies.rectangle(100,20,200,40,{
+           	   render:{
+           		     fillStyle:"#f0c"
+           	   }
+           })
+           var ground=Bodies.rectangle($(window).width()/2,$(window).height()-10,$(window).width(),20,{
+           	    isStatic:true,
+             	render:{
+           		    fillStyle:"#9fa"
+           	    }
+           })
+           var stack_rect=Composites.stack(300,100,4,3,0,0,function(x,y){
+           	   return Bodies.rectangle(x,y,150,40);
+           })
+           var stack_circle=Composites.stack(1200,100,5,5,2,3,function(x,y){
+           	   return Bodies.circle(x,y,30);
+           })
+           var mouseConstraint=MouseConstraint.create(engine,{});
+           
+           World.add(world,[recA,ground,stack_rect,stack_circle,mouseConstraint]);
     
 
     // keep the mouse in sync with rendering
