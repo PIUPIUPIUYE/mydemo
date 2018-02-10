@@ -4,6 +4,7 @@ Example.fallingBox = function() {
     var Engine=Matter.Engine,
                 Render=Matter.Render,
                 World=Matter.World,
+                Runner = Matter.Runner,
                 Mouse=Matter.Mouse,
                 MouseConstraint=Matter.MouseConstraint,
                 Composites=Matter.Composites,
@@ -21,6 +22,9 @@ Example.fallingBox = function() {
            });
             Render.run(render);
            Engine.run(engine);
+           
+           var runner = Runner.create();
+    Runner.run(runner, engine);
            
            var recA=Bodies.rectangle(100,20,200,40,{
            	   render:{
