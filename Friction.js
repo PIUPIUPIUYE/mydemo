@@ -1,11 +1,11 @@
 var Example = Example || {};
 
-Example.airFriction = function() {
+Example.friction = function() {
     var Engine = Matter.Engine,
         Render = Matter.Render,
         Runner = Matter.Runner,
         MouseConstraint = Matter.MouseConstraint,
-      Mouse = Matter.Mouse,
+        Mouse = Matter.Mouse,
         World = Matter.World,
         Bodies = Matter.Bodies;
 
@@ -32,16 +32,26 @@ Example.airFriction = function() {
 
     // add bodies
     World.add(world, [
-        // falling blocks
-        Bodies.rectangle(200, 100, 60, 60, { frictionAir: 0.001 }),
-        Bodies.rectangle(400, 100, 60, 60, { frictionAir: 0.05 }),
-        Bodies.rectangle(600, 100, 60, 60, { frictionAir: 0.1 }),
-
         // walls
         Bodies.rectangle(400, 0, 800, 50, { isStatic: true }),
         Bodies.rectangle(400, 600, 800, 50, { isStatic: true }),
         Bodies.rectangle(800, 300, 50, 600, { isStatic: true }),
         Bodies.rectangle(0, 300, 50, 600, { isStatic: true })
+    ]);
+
+    World.add(world, [
+        Bodies.rectangle(300, 180, 700, 20, { isStatic: true, angle: Math.PI * 0.06 }),
+        Bodies.rectangle(300, 70, 40, 40, { friction: 0.001 })
+    ]);
+
+    World.add(world, [
+        Bodies.rectangle(300, 350, 700, 20, { isStatic: true, angle: Math.PI * 0.06 }),
+        Bodies.rectangle(300, 250, 40, 40, { friction: 0.0005 })
+    ]);
+
+    World.add(world, [
+        Bodies.rectangle(300, 520, 700, 20, { isStatic: true, angle: Math.PI * 0.06 }),
+        Bodies.rectangle(300, 430, 40, 40, { friction: 0 })
     ]);
 
     // add mouse control
